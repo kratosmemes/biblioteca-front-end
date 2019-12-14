@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="principal.html">Biblioteca La Esperanza</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Altas
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="usuario-alta.html">Alta Usuario</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="libro-alta.html">Alta Libro</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="prestamo-alta.html">Alta Préstamo</a>
+              </div>
+              </li>
+
+              <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Bajas
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="usuario-baja.html">Baja Usuario</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="libro-baja.html">Baja Libro</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="prestamo-baja.html">Baja Préstamo</a>
+              </div>
+              </li>
+
+              <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Actualizar
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="usuario-actualizar.html">Actualizar Usuario</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="libro-actualizar.html">Actualizar Libro</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="prestamo-actualizar.html">Actualizar Préstamo</a>
+              </div>
+              </li>
+
+              <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Buscar
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="usuario-obtener.html">Buscar Usuario</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="libro-obtener.html">Buscar Libro</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="prestamo-obtener.html">Buscar Préstamo</a>
+              </div>
+              </li>
+            
+          </ul>
+          
+          <ul class="navbar-nav ml-auto flex-column-reverse flex-md-row">
+            <li>
+            <a id="cerrar_sesion" class="nav-link" href="index.html">Cerrar Sesion <span class="sr-only"></span></a>
+            </li>
+            </ul>
+
+        </div>
+      </nav>
+<div class="container-fluid">
+<div class="row h-100 d-flex justify-content-center">
+<div class="col-md-6 mt-5">
+<legend>Mostrar Préstamos</legend>
+<hr>
+<form enctype="multipart/form-data">
+<p id="error" style="color: red; display: none;"></p>
+<button type="submit" class="btn btn-info">Mostrar</button>
+</form>
+</div>
+</div>
+</div>
+
+<br>
+
+<div class="table-responsive-sm">
+  <table class="table" id="listarPrestamos">
+      <thead class="bg-primary text-white">
+          <tr>
+              <th scope="col">Cliente</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Libro</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Usuario</th>
+          </tr>
+      </thead>
+      <tbody>
+      </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+if(localStorage.getItem("token") === null){
+        window.location.href = "index.html";
+      } 
+      
+      $('#cerrar_sesion').on('click', function(e) {
+      localStorage.clear();
+      window.location.href = "index.html";
+      });
+
+$('form').on('submit', function(e) {
+e.preventDefault();
+e.stopImmediatePropagation();
+// $(document).ready(function() {
+
+$.ajax({
+type: 'GET',
+url: 'http://localhost:3000/prestamo',
+data: $('form').serialize(),
+beforeSend: function(request){
+  request.setRequestHeader("token", window.localStorage.getItem('token'));
+},
+success: function(resp) {
+alert("Préstamos mostrados con exito");
+
+console.log(resp.prestamos);
+                        $.each(resp.prestamos, function(i, item) {
+                            $("#listarPrestamos > tbody").append(`<tr>` +
+                                `<td><b>` + item.cliente + `</b></td>` +
+                                `<td>` + item.telefono + `</td>` +
+                                `<td>` + item.libro + `</td>` +
+                                `<td>` + item.cantidad + `</td>` +
+                                `<td><b>` + item.usuario + `</b></td>` +                     
+                                `</tr>`);
+                        });
+                      },
+error: function(err) {
+$('#error').text(err.responseJSON.err.message);
+$('#error').show();
+}
+});
+});
+
+$('input').on('focus', function(e) {
+$('#error').hide();
+});
+</script>
+</body>
+
+</html>
